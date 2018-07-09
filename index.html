@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Приклад</title>
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB" crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/ui/1.8.21/jquery-ui.min.js"></script>
+<script src="jquery.ui.touch-punch.min.js"></script>
+<style>
+#dropzone, #nodropzone, #trash {
+	min-height:300px;
+}
+</style>
+</head>
+<body>
+
+<div class="container-fluid">
+
+<div class="col-5 float-left border border-primary rounded-top m-3 p-0">
+<div class="list-group-item border border-primary active mb-1">Блок 1</div>
+<div id="dropzone" class="col-12 float-left bg-light">
+
+<div draggable="true" class="bg-white border m-2" ondragstart="drag(event)" id="drag">
+<p class="m-3">Один</p>
+</div>
+<div draggable="true" class="bg-white border m-2" ondragstart="drag(event)" id="drag">
+<p class="m-3">Два</p>
+</div>
+
+<div id="num1" class="position-absolute fixed-bottom m-4"></div>
+</div>
+</div>
+
+<div class="col-5 float-left border border-primary rounded-top m-3 p-0">
+<div class="list-group-item active mb-1">Блок 2</div>
+<div id="dropzone" class="col-12 float-left bg-light">
+
+<div draggable="true" class="bg-white border m-2" ondragstart="drag(event)" id="drag">
+<p class="m-3">Три</p>
+</div>
+<div draggable="true" class="bg-white border m-2" ondragstart="drag(event)" id="drag">
+<p class="m-3">Чотири</p>
+</div>
+
+<div id="num2" class="position-absolute fixed-bottom m-4"></div>
+</div>
+</div>
+
+
+<div class="col-5 float-left border border-danger rounded-top m-3 p-0">
+<div class="list-group-item bg-danger text-white mb-1">Блок 3</div>
+<div id="nodropzone" class="col-12 float-left bg-light">
+
+<div draggable="true" class="bg-white border m-2" ondragstart="drag(event)" id="drag">
+<p class="m-3">П'ять</p>
+</div>
+<div draggable="true" class="bg-white border m-2" ondragstart="drag(event)" id="drag">
+<p class="m-3">Шість</p>
+</div>
+
+<div id="num3" class="position-absolute fixed-bottom m-4"></div>
+</div>
+</div>
+
+
+<div class="col-5 float-left border border-dark rounded-top m-3 p-0">
+<div class="list-group-item bg-dark text-white mb-1">Trash</div>
+<div id="trash" class="col-12 float-left bg-light">
+
+</div>
+</div>
+
+</div>
+<script>
+$( "#drag" ).draggable();
+$( "#drag" ).click(function() {
+  console.log('clicked!')
+});
+
+$( "#clickAction" ).click(function() {
+  if($(this).hasClass('blue')){
+      $(this).removeClass('blue');
+  }else{
+    $(this).addClass('blue');
+  }
+});
+</script>
+<script>
+function drag(ev) {
+    ev.dataTransfer.setData("text", ev.target.id);
+}
+window.onload = num();
+function num() {
+    document.getElementById("num1").innerHTML=document.getElementById("num1").parentNode.children.length-1;
+	document.getElementById("num2").innerHTML=document.getElementById("num2").parentNode.children.length-1;
+	document.getElementById("num3").innerHTML=document.getElementById("num3").parentNode.children.length-1;
+}
+
+
+  /* events fired on the draggable target */
+  document.addEventListener("drag", function( event ) {
+ 
+  }, false);
+
+  document.addEventListener("dragstart", function( event ) {
+    // store a ref. on the dragged elem
+    dragged = event.target;
+    // make it half transparent
+    event.target.style.opacity = .6;
+  }, false);
+
+  document.addEventListener("dragend", function( event ) {
+    // reset the transparency
+    event.target.style.opacity = 1;
+	num();
+  }, false);
+
+  /* events fired on the drop targets */
+  document.addEventListener("dragover", function( event ) {
+    // prevent default to allow drop
+    event.preventDefault();
+  }, false);
+
+  document.addEventListener("dragenter", function( event ) {
+    // highlight potential drop target when the draggable element enters it
+    if ( event.target.id == "dropzone" ) {
+		event.target.style.background = "";
+    }
+  }, false);
+
+  document.addEventListener("dragleave", function( event ) {
+    // reset background of potential drop target when the draggable element leaves it
+    if ( event.target.id == "dropzone" ) {
+		event.target.style.background = "";
+    }
+  }, false);
+
+  document.addEventListener("drop", function( event ) {
+      // prevent default action (open as link for some elements)
+      event.preventDefault();
+      // move dragged elem to the selected drop target
+      if ( event.target.id == "dropzone" ) {
+		dragged.parentNode.removeChild( dragged );
+        event.target.appendChild( dragged );
+      } else {
+		if ( event.target.id == "trash" ) {
+			dragged.parentNode.removeChild( dragged );
+			} if ( event.target.id == "nodropzone" ) {
+				alert( 'Заборонено' );
+				} 
+} 
+  }, false);
+  
+ let jqElements = $("#nodropzone").each(function () {
+  $(this).find('#drag').length;
+})
+
+
+ console.log(document.getElementById('dropzone').children.length)
+ console.log(jqElements)
+ console.log($("#drag").length)
+</script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jqueryui-touch-punch/0.2.3/jquery.ui.touch-punch.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T" crossorigin="anonymous"></script>
+</body>
+</html>

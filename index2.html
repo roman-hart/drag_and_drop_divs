@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<!-- saved from url=(0031)https://www.codeply.com/api/run -->
+<html class="mdl-js"><style type="text/css" id="block-image-video"></style><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style type="text/css">@charset "UTF-8";[ng\:cloak],[ng-cloak],[data-ng-cloak],[x-ng-cloak],.ng-cloak,.x-ng-cloak,.ng-hide:not(.ng-hide-animate){display:none !important;}ng\:form{display:block;}.ng-animate-shim{visibility:hidden;}.ng-anchor{position:absolute;}</style>
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Codeply preview</title>
+  <!--<base target="_self">--><base href="." target="_self">
+  <meta name="description" content="Drag and drop list example with angular and Bootstrap 4. Choose multiple items in 2 pick lists. This example shows picking team members from staff.">
+  <meta name="google" value="notranslate">
+  <link rel="shortcut icon" href="https://www.codeply.com/images/cp_ico.png">
+
+ 
+  <link rel="stylesheet" href="bootstrap.min.css">
+  <link href="font-awesome.min.css" rel="stylesheet">
+  
+<div class="container-fluid py-3 ng-scope" ng-app="myApp"> 
+      <div class="row ng-scope" ng-controller="ctrlDualList">
+            <div class="col-md-12 text-center"><h4>Drag &amp; Drop Pick List</h4><h6 class="small pb-4">Bootstrap 4 Beta</h6></div>
+            <div class="col-md-4 ml-auto">
+              <div class="list-group ng-isolate-scope" id="list1" x-lvl-drop-target="true" x-on-drop="drop(dragEl, dropEl, bToA)">
+                <a href="javascript:;" class="list-group-item active">Staff
+                  <label title="Toggle all" class="custom-control custom-checkbox float-right">
+                      <input type="checkbox" ng-click="toggleA()" ng-model="toggle" value="" class="custom-control-input float-right ng-pristine ng-untouched ng-valid ng-empty">
+                      <span class="custom-control-indicator"></span>
+                   </label>
+                </a>
+                <!-- ngRepeat: user in listA --><a href="javascript:;" ng-repeat="user in listA" data-id="1" x-lvl-draggable="true" class="list-group-item list-group-item-action ng-binding ng-scope" draggable="true" id="9d65da73-3eb0-a9ea-e047-8689a52c33fd">Ma                
+                    <label class="custom-control custom-checkbox float-right">
+                      <input type="checkbox" id="1" ng-click="selectedA.push(user.id)" name="selectedA[]" value="1" ng-checked="selectedA.indexOf(user.id) &gt; -1" class="custom-control-input float-right">
+                      <span class="custom-control-indicator"></span>
+                    </label>
+                  </a><!-- end ngRepeat: user in listA --><a href="javascript:;" ng-repeat="user in listA" data-id="2" x-lvl-draggable="true" class="list-group-item list-group-item-action ng-binding ng-scope" draggable="true" id="89d5637a-b400-5265-f7b5-af9c9f14c166">Mark                   
+                    <label class="custom-control custom-checkbox float-right">
+                      <input type="checkbox" id="2" ng-click="selectedA.push(user.id)" name="selectedA[]" value="2" ng-checked="selectedA.indexOf(user.id) &gt; -1" class="custom-control-input float-right">
+                      <span class="custom-control-indicator"></span>
+                    </label>
+                  </a>
+              </div>
+            </div><!--/col-4-->
+            <div class="col-md-2 my-auto text-center">
+              <div class="btn-group">
+                <button title="Send to list 1" class="btn btn-default" ng-click="bToA()" id="btnA"><i class="fa fa-chevron-left"></i></button>
+                <button title="Send to list 2" class="btn btn-default" ng-click="aToB()" id="btnB"><i class="fa fa-chevron-right"></i></button>
+              </div>
+ 
+            </div><!--/col-2-->
+            <div class="col-md-4 mr-auto">
+              <div class="list-group ng-isolate-scope" id="list2" x-lvl-drop-target="true" x-on-drop="drop(dragEl, dropEl, aToB)">
+                <a href="javascript:;" class="list-group-item active">Team Members
+                  <label title="Toggle all" class="custom-control custom-checkbox float-right">
+                      <input type="checkbox" ng-click="toggleB()" ng-model="toggle" value="" class="custom-control-input float-right ng-pristine ng-untouched ng-valid ng-empty">
+                      <span class="custom-control-indicator"></span>
+                   </label>
+                </a>
+                <!-- ngRepeat: user in listB --><a href="javascript:;" ng-repeat="user in listB" data-id="7" class="list-group-item list-group-item-action ng-binding ng-scope" x-lvl-draggable="true" draggable="true" id="cb1d4a27-c650-30d8-c675-db64d3bed574">Jeff
+                    <label class="custom-control custom-checkbox float-right">
+                      <input type="checkbox" id="7" ng-click="selectedB.push(user.id)" name="selectedB[]" value="7" ng-checked="selectedB.indexOf(user.id) &gt; -1" class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                    </label>
+                </a><!-- end ngRepeat: user in listB --><a href="javascript:;" ng-repeat="user in listB" data-id="8" class="list-group-item list-group-item-action ng-binding ng-scope" x-lvl-draggable="true" draggable="true" id="d8b03f8f-16d8-7a2f-f888-3aec10b4005b">Betty
+                    <label class="custom-control custom-checkbox float-right">
+                      <input type="checkbox" id="8" ng-click="selectedB.push(user.id)" name="selectedB[]" value="8" ng-checked="selectedB.indexOf(user.id) &gt; -1" class="custom-control-input">
+                      <span class="custom-control-indicator"></span>
+                    </label>
+                </a>
+              </div>
+            </div><!--/col-4-->
+      </div><!--/row-->
+</div><!--/container-fluid-->
+  
+
+
+
+  
+  <script>  
+    // prevent href=# click jump
+    document.addEventListener("DOMContentLoaded", function() {
+      var links = document.getElementsByTagName("A");
+      for(var i=0; i < links.length; i++) {
+        if(links[i].href.indexOf('#')!=-1) {
+          links[i].addEventListener("click", function(e) {
+          console.debug("prevent href=# click");
+              if (this.hash) {
+                if (this.hash=="#") {
+                  e.preventDefault();
+                  return false;
+                }
+                else {
+                  /*
+                  var el = document.getElementById(this.hash.replace(/#/, ""));
+                  if (el) {
+                    el.scrollIntoView(true);
+                  }
+                  */
+                }
+              }
+              return false;
+          })
+        }
+      }
+    }, false);
+  </script>
+  
+  <!--scripts loaded here-->
+  
+  <script src="jquery.min.js.Без названия"></script>
+  <script src="popper.min.js.Без названия"></script>
+  <script src="bootstrap.min.js.Без названия"></script>
+  <script src="angular.min.js.Без названия"></script>
+  
+  
+  
+  <script>
+  /* load drag-and-drop directives -- credit: http://logicbomb.github.io/ng-directives/script/lvl-drag-drop.js */
+angular
+.module('lvl.services',[])
+.factory('uuid', function() {
+    var svc = {
+        new: function() {
+            function _p8(s) {
+                var p = (Math.random().toString(16)+"000000000").substr(2,8);
+                return s ? "-" + p.substr(0,4) + "-" + p.substr(4,4) : p ;
+            }
+            return _p8() + _p8(true) + _p8(true) + _p8();
+        },
+         
+        empty: function() {
+          return '00000000-0000-0000-0000-000000000000';
+        }
+    };
+     
+    return svc;
+});
+
+var module = angular.module("lvl.directives.dragdrop", ['lvl.services']);
+
+module.directive('lvlDraggable', ['$rootScope', 'uuid', function($rootScope, uuid) {
+  return {
+    restrict: 'A',
+    link: function(scope, el, attrs, controller) {
+      angular.element(el).attr("draggable", "true");
+      
+      var id = angular.element(el).attr("id");
+      
+      if (!id) {
+        id = uuid.new()
+        angular.element(el).attr("id", id);
+      }
+      
+      el.bind("dragstart", function(e) {
+        e.dataTransfer.setData('text', id);
+        $rootScope.$emit("LVL-DRAG-START");
+      });
+      
+      el.bind("dragend", function(e) {
+        $rootScope.$emit("LVL-DRAG-END");
+      });
+    }
+  }
+}]);
+module.directive('lvlDropTarget', ['$rootScope', 'uuid', function($rootScope, uuid) {
+  return {
+    restrict: 'A',
+    scope: {
+      onDrop: '&'
+    },
+    link: function(scope, el, attrs, controller) {
+      
+      var id = angular.element(el).attr("id");
+      
+      if (!id) {
+        id = uuid.new();
+        angular.element(el).attr("id", id);
+      }
+      
+      el.bind("dragover", function(e) {
+        if (e.preventDefault) {
+          e.preventDefault();
+        }
+        
+        e.dataTransfer.dropEffect = 'move';
+        return false;
+      });
+      
+      el.bind("dragenter", function(e) {
+        // this / e.target is the current hover target.
+        angular.element(e.target).addClass('lvl-over');
+      });
+      
+      el.bind("dragleave", function(e) {
+        angular.element(e.target).removeClass('lvl-over');  // this / e.target is previous target element.
+      });
+      
+      el.bind("drop", function(e) {
+        if (e.preventDefault) {
+          e.preventDefault();
+        }
+        
+        if (e.stopPropagation) {
+          e.stopPropagation();
+        }
+        var data = e.dataTransfer.getData("text");
+        var dest = document.getElementById(id);
+        var src = document.getElementById(data);
+        
+        scope.onDrop({dragEl: src, dropEl: dest});
+        $rootScope.$emit("LVL-DRAG-END");
+      });
+      
+      $rootScope.$on("LVL-DRAG-START", function() {
+        var el = document.getElementById(id);
+        angular.element(el).addClass("lvl-target");
+      });
+      
+      $rootScope.$on("LVL-DRAG-END", function() {
+        var el = document.getElementById(id);
+        angular.element(el).removeClass("lvl-target");
+        
+        var els = document.getElementsByClassName("lvl-over");
+        for (var e in els) {
+          angular.element(els[e]).removeClass("lvl-over");
+        }
+      });
+    }
+  }
+}]);
+/*end directives*/
+
+var userData = [
+  {id:1,firstName:'Mar'},
+  {id:2,firstName:'Mark'},
+  {id:3,firstName:'Alex'},
+  {id:4,firstName:'Bob'},
+  {id:5,firstName:'David'},
+];
+
+function ctrlDualList($scope) {
+ 
+  // init
+  $scope.selectedA = [];
+  $scope.selectedB = [];
+   
+  $scope.listA = userData.slice(0,5);
+  $scope.listB = userData.slice(6,10);
+  $scope.items = userData;
+  
+  $scope.checkedA = false;
+  $scope.checkedB = false;
+  
+  function arrayObjectIndexOf(myArray, searchTerm, property) {
+      for(var i = 0, len = myArray.length; i < len; i++) {
+          if (myArray[i][property] === searchTerm) return i;
+      }
+      return -1;
+  }
+  
+  $scope.aToB = function() {
+    for (i in $scope.selectedA) {
+      var moveId = arrayObjectIndexOf($scope.items, $scope.selectedA[i], "id"); 
+      $scope.listB.push($scope.items[moveId]);
+      var delId = arrayObjectIndexOf($scope.listA, $scope.selectedA[i], "id"); 
+      $scope.listA.splice(delId,1);
+    }
+    reset();
+  };
+  
+  $scope.bToA = function() {
+    for (i in $scope.selectedB) {
+      var moveId = arrayObjectIndexOf($scope.items, $scope.selectedB[i], "id"); 
+      $scope.listA.push($scope.items[moveId]);
+      var delId = arrayObjectIndexOf($scope.listB, $scope.selectedB[i], "id"); 
+      $scope.listB.splice(delId,1);
+    }
+    reset();
+  };
+  
+  function reset(){
+  	$scope.selectedA=[];
+    $scope.selectedB=[];
+    $scope.toggle=0;
+  }
+  
+  $scope.toggleA = function() {
+    
+    if ($scope.selectedA.length>0) {
+      $scope.selectedA=[];
+    }
+    else {
+      for (i in $scope.listA) {
+        $scope.selectedA.push($scope.listA[i].id);
+      }
+    }
+  }
+  
+  $scope.toggleB = function() {
+    
+    if ($scope.selectedB.length>0) {
+      $scope.selectedB=[];
+    }
+    else {
+      for (i in $scope.listB) {
+        $scope.selectedB.push($scope.listB[i].id);
+      }
+    }
+  }
+ 
+  $scope.drop = function(dragEl, dropEl, direction) {
+    
+    var drag = angular.element(dragEl);
+    var drop = angular.element(dropEl);
+    var id = drag.attr("data-id");
+    var el = document.getElementById(id);
+    
+    if(!angular.element(el).attr("checked")){
+      angular.element(el).triggerHandler('click');
+    }
+    
+    direction();
+    $scope.$digest();
+  };
+  
+};
+  
+angular
+  .module('myApp', ['lvl.directives.dragdrop']) 
+  .controller('ctrlDualList', ['$scope', ctrlDualList]);
+  
+$(document).ready(function() {
+	jQuery.event.props.push('dataTransfer'); //prevent conflict with drag-drop
+});
+  </script>
+
+
+
+</body></html>
